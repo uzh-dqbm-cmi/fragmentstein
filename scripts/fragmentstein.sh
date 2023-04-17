@@ -1,6 +1,6 @@
 #!/bin/bash
 
-VERSION=2022.10
+VERSION=2023.4
 
 ###############################################################################
 ##   .-""-.     __  __        __        __      ___  __  ___   __            ##
@@ -26,6 +26,7 @@ usage()
   echo -e "\t-r, --read_length NUMBER\t\tRead len length. Default: 101\n"
   echo -e "\t-qf, --map_quality_filter NUMBER\t\tMapping quality filter to apply. For a value equal to '0', accepting all fragments.  Default: 30\n"
   echo -e "\t-qd, --map_quality_default NUMBER\t\tMapping quality if missing in the finaleDB frag.tsv file. Default: 60\n"
+  echo -e "\t-bq, --base_quality CHAR\tASCII of Phred-scaled base QUALity+33. Default: F (quality: 37).\n"
   echo -e "\t-N, --replace_incomplete_nucleotides \t\tReplace all incompletely specified nucleotide bases with N.\n"
   echo -e "\t-s, --sort \t\tSort the output BAM file by coordinate.\n"
 	echo -e "\t-t, --threads NUMBER\t\t\tNumber of parallel threads to be used when possible. Default: 1\n"
@@ -35,6 +36,7 @@ usage()
 READ_LENGTH=101
 MAP_QUALITY_FILTER=30
 MAP_QUALITY_DEFAULT=60
+BASE_QUALITY="F"
 SORT=false
 INCOMPLETE_N=false
 THREADS=1
@@ -75,6 +77,10 @@ do
             ;;
         -qd|--map_quality_default)
             MAP_QUALITY_DEFAULT="${VALUE}"
+            shift 2
+            ;;
+        -bq|--base_quality)
+            BASE_QUALITY="${VALUE}"
             shift 2
             ;;
         -s|--sort)
@@ -145,7 +151,8 @@ if [[ -f "$INPUTBED" ]]; then
 else
   echo "Unzipping, converting FinaleDB file ${INPUT} and accepting mapping quality>${MAP_QUALITY_FILTER} to BED file format ..."
   echo "Creating paired reads and add fragments length into a temp BED file ${INPUTBED2} ..."
-  gunzip -c "$INPUT" | \
+   # TODO support for non-gzip input data
+    gunzip -c "$INPUT" | \
     awk -v mqf=${MAP_QUALITY_FILTER} '$4>mqf' | \
     awk -F"\t" -v OFS="\t" '{{k=$4; l=$5; $4="F"++i; $5=k; $6=l}}1' | \
     awk -v r="${READ_LENGTH}" 'BEGIN{FS=OFS="\t"}
@@ -183,7 +190,7 @@ echo "if read fwd->flag=99, if read rev -> flag=147, set mate start, set mate ch
 
 bedtools getfasta -name -fi "${GENOME}" -bed "${INPUTBED2}" | grep -v ">" | tr '[:lower:]' '[:upper:]' | \
   paste "${TMPSAM}" - | \
-  awk -v r="${READ_LENGTH}" -v n="$INCOMPLETE_N" 'BEGIN{FS=OFS="\t"} {
+  awk -v r="${READ_LENGTH}" -v n="${INCOMPLETE_N}" -v bq="${BASE_QUALITY}" 'BEGIN{FS=OFS="\t"} {
           if ($2 == 0) {
               $2= 99;
               if ($4+$9-r > $4) $8= $4+$9-r; else $8= $4;
@@ -193,7 +200,7 @@ bedtools getfasta -name -fi "${GENOME}" -bed "${INPUTBED2}" | grep -v ">" | tr '
               $9= -$9;
           }
           $7= "="; $11= $10;
-      } n=="true" {gsub(/B|R|S|W|K|M|Y|H|V|D/, "N", $10)} {gsub(/./, "F", $11)} {print}' | \
+      } n=="true" {gsub(/B|R|S|W|K|M|Y|H|V|D/, "N", $10)} {gsub(/./, bq, $11)} {print}' | \
   cat "${TMPSAM}.header" - | \
   samtools view -@ ${THREADS} -bo "${OUTPUT}" - \
   && rm "${INPUTBED2}" && rm "${TMPSAM}" && rm "${TMPSAM}.header"

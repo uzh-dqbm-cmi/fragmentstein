@@ -1,0 +1,33 @@
+[build-system]
+requires = ["poetry-core"]
+build-backend = "poetry.core.masonry.api"
+
+[tool.poetry.dependencies]
+python = "^3.7"
+
+[tool.poetry]
+name = "fragmentstein"
+version = "2023.4"
+description = "Resurrecting alignment files from non-sensitive fragment information for cell-free DNA analysis"
+authors = ["Zsolt Balazs <zsolt.balazs@uzh.ch>",
+    "Todor Gitchev <todor.gitchev@uzh.ch>"]
+readme = "README.md"
+packages = [{include = "scripts"}]
+classifiers = [
+    'Development Status :: 4 - Beta',
+    'License :: OSI Approved :: GNU General Public License v3',
+    'Programming Language :: Unix Shell',
+    'Programming Language :: Awk',
+    'Intended Audience :: Science/Research',
+    'Topic :: Scientific/Engineering :: Bio-Informatics',
+]
+#dependencies = [
+##    'samtools',
+##    'bedtools',
+#]
+
+[tool.poetry.scripts]
+fragmentstein = "scripts.fragmentstein:run"
+
+[tool.poetry.urls]
+repository = "https://github.com/uzh-dqbm-cmi/fragmentstein"
