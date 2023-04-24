@@ -19,6 +19,17 @@ Make sure you have all the dependencies and you will be able to run the program.
 - **gunzip** (gzip) version 1.6 or higher;
 
 ## <a name="installation"></a>Installation
+
+For installing from the Python PyPi repository:
+```sh
+pip install fragmentstein
+```
+Afterwards, you can use fragmentstein directly from your shell:
+```sh
+fragmentstein -h
+```
+ Alternatively, you can install it from sources:
+
 Clone the repository.
 ```sh
 git clone https://github.com/uzh-dqbm-cmi/fragmentstein
@@ -30,7 +41,24 @@ Add the path of the _'./scripts/fragmentstein.sh'_ into your PATH, best in your 
 ## <a name="usage"></a>Test usage
 The following examples will show you how to do a test run
 ```sh
-fragmentstein.sh -h
+mkdir results
+fragmentstein.sh -i -i tests/data/test_sample1.tsv.bgz -o results/test_sample1.bam \
+    -g tests/data/resources/test_ref_hg38.fna -c tests/data/resources/test_ref.chrom.sizes
+```
+
+You can install the Python wrapper also from sources as follows:
+First install the Python dependency management and packaging tool called Poetry: 
+```sh
+curl -sSL https://install.python-poetry.org | python3 -
+```
+Followed by installing the fragmentstein Python wrapper from the root of the cloned repository:
+```sh
+poetry install
+```
+
+To run tests use the following command:
+```sh
+poetry run pytest
 ```
 
 ## <a name="arguments"></a>Arguments
