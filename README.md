@@ -6,7 +6,8 @@ Creating a BAM files from non-sensitive fragments data (i.e. FinaleDB frag.tsv.b
 
 - [Dependencies](#dependencies)
 - [Installation](#installation)
-- [Usage](#usage)
+- [Test usage](#usage)
+- [Arguments](#arguments)
 - [Credits](#credits)
 
 Make sure you have all the dependencies and you will be able to run the program.
@@ -31,8 +32,26 @@ The following examples will show you how to do a test run
 fragmentstein test
 ```
 
+## <a name="arguments"></a>Arguments
+Required arguments
+`-i` or `--input` Path to finaleDB `frag.tsv.bgz` file or `.bed`  or `.bedpe` file. Expected are either a 6-column BED file or a 10-column paired-end BEDPE file.
+`-g` or `--genome` Path to the reference genome fasta file.
+`-c` or `--chrom_sizes` Chromosome sizes file.
+Optional arguments
+`-o` or `--output` path to and name of the output BAM file. Default is to substitute the `.tsv.gz` part of the extension with `.bam`.
+`-r` or `--read_length` Read length. Default: 101. Both reverse and forward reads of a fragment will have this length unless the fragment is shorter than the read length.
+`-qf` or `--map_quality_filter` Minimum mapping quality. Setting it to '0' accepts all fragments.  Default: 30.
+`-qd` or `--map_quality_default` Mapping quality to set for example if missing from the input files or if you want to change it for downstream analyses. Default: 60.
+`-bq` or `--base_quality` ASCII of [Phred]-scaled base QUALity+33. Default: F (quality: 37).
+`-N` or `--replace_incomplete_nucleotides` Replace all [incompletely specified nucleotides] with N.
+`-s` or `--sort` Sort the output BAM file by coordinate.
+`-t` or `--threads` Number of parallel threads to be used when possible. Default: 1.
+`--temp` Temporary folder where to store intermediate temporary files. Default:  same folder as the output file.
+
+
 ## <a name="credits"></a>Credits
 Fragmentstein is developed and maintained by Zsolt Balázs and Todor Gitchev.
-
+[Phred]: https://en.wikipedia.org/wiki/Phred_quality_score
+[incompletely specified nucleotides]: https://en.wikipedia.org/wiki/Nucleic_acid_sequence
 [Wiki]: https://github.com/uzh-dqbm-cmi/fragmentstein/wiki
 
