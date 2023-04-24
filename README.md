@@ -1,5 +1,5 @@
 # Fragmentstein
-Create a BAM file out of insensitive fragments data (i.e. FinaleDB frag.tsv.bgz file) including sequences extracted from a reference genome.
+Create a BAM file out of non-sensitive fragments data (i.e. FinaleDB frag.tsv.bgz file) using sequences extracted from a reference genome.
 
 
 ### Requirements
