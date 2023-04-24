@@ -41,6 +41,7 @@ SORT=false
 INCOMPLETE_N=false
 THREADS=1
 TEMP=
+INPUTBEDPE=
 
 while [[ "$1" != "" ]]
 do
@@ -121,6 +122,8 @@ if [[ "${INPUT: -4}" == ".bed" ]]; then
   INPUTBED="$INPUT"
 elif [[ "${INPUT: -8}" == ".tsv.bgz" ]]; then
   INPUTBED=${INPUT/.tsv.bgz/.bed}
+elif [[ "${INPUT: -6}" == ".bedpe" ]]; then
+  INPUTBEDPE="${INPUT}"
 else
   echo "ERROR: Unsupported input file format ${INPUT}!"
   usage
@@ -133,7 +136,9 @@ else
   INPUTBED2="${TEMP}/$(basename -- $OUTPUT).tmp.bed"
 fi
 
-if [[ -f "$INPUTBED" ]]; then
+if [[ -f "$INPUTBEDPE" ]]; then
+    awk -F"\t" '{print $1"\t"$2"\t"$3"\t"$7"\t"$8"\t"$9"\n"$4"\t"$5"\t"$6"\t"$7"\t"$8"\t"$10}' "$INPUTBEDPE" > "${INPUTBED2}"
+elif [[ -f "$INPUTBED" ]]; then
   echo "Using input BED file ${INPUTBED}."
   awk -v r="${READ_LENGTH}" 'BEGIN{FS=OFS="\t"}
       { x= $3; f= $3-$2;

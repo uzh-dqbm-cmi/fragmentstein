@@ -23,13 +23,14 @@ Clone the repository.
 ```sh
 git clone https://github.com/uzh-dqbm-cmi/fragmentstein
 cd fragmentstein
-chmod 755 fragmentstein
 ```
+
+Add the path of the _'./scripts/fragmentstein.sh'_ into your PATH, best in your ~/.bashrc or ~/.zshrc
 
 ## <a name="usage"></a>Test usage
 The following examples will show you how to do a test run
 ```sh
-fragmentstein test
+fragmentstein.sh -h
 ```
 
 ## <a name="arguments"></a>Arguments
