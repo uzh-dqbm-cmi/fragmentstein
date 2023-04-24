@@ -44,7 +44,7 @@ Optional arguments
 
 `-o` or `--output`                          Path to and name of the output BAM file. Default is to substitute the `.tsv.gz` part of the extension with `.bam`.
 
-`-r` or `--read_length`                     Read length. Default: 101. Both reverse and forward reads of a fragment will have this length unless the fragment is shorter than the read length.
+`-r` or `--read_length`                     Both reverse and forward reads of a fragment will have this length unless the fragment is shorter than the read length. Default: 101.
 
 `-qf` or `--map_quality_filter`             Minimum mapping quality. Setting it to '0' accepts all fragments.  Default: 30.
 
@@ -54,7 +54,7 @@ Optional arguments
 
 `-N` or `--replace_incomplete_nucleotides`  Replace all [incompletely specified nucleotides] with N.
 
-`-s` or `--sort`                            Sort the output BAM file by coordinate.
+`-s` or `--sort`                            Sort the output BAM file by coordinate. No value has to be specified, just type `-s` for sorting.
 
 `-t` or `--threads`                         Number of parallel threads to be used when possible. Default: 1.
 
@@ -63,7 +63,7 @@ Optional arguments
 
 ## <a name="credits"></a>Credits
 Fragmentstein is developed and maintained by Zsolt Balázs and Todor Gitchev.
+
 [Phred]: https://en.wikipedia.org/wiki/Phred_quality_score
 [incompletely specified nucleotides]: https://en.wikipedia.org/wiki/Nucleic_acid_sequence
-[Wiki]: https://github.com/uzh-dqbm-cmi/fragmentstein/wiki
 
