@@ -3,7 +3,9 @@ requires = ["poetry-core"]
 build-backend = "poetry.core.masonry.api"
 
 [tool.poetry.dependencies]
-python = "^3.8"
+python = "^3.10"
+#samtools = "^1.12"
+#bedtools = "^2.27"
 
 [tool.poetry.group.test.dependencies]
 pytest = "^7.2.2"
@@ -24,10 +26,6 @@ classifiers = [
     'Intended Audience :: Science/Research',
     'Topic :: Scientific/Engineering :: Bio-Informatics',
 ]
-#dependencies = [
-##    'samtools',
-##    'bedtools',
-#]
 
 [tool.poetry.scripts]
 fragmentstein = "scripts.fragmentstein:run"

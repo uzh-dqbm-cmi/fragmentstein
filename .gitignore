@@ -1,3 +1,4 @@
 dist/
 results/
 fragmentstein.egg-info/
+.pytest_cache

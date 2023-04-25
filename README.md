@@ -17,6 +17,7 @@ Make sure you have all the dependencies and you will be able to run the program.
 - **bedtools** version v2.30.0 or higher;
 - **awk** version 20200816 or higher;
 - **gunzip** (gzip) version 1.6 or higher;
+- **Python** version 3.10 or higher, only if you install it as a Python package;
 
 ## <a name="installation"></a>Installation
 
@@ -24,11 +25,25 @@ For installing fragmentstein from the Python PyPi repository:
 ```sh
 pip install fragmentstein
 ```
+
+Optional, you can install it in a dedicated Python environment:
+```sh
+conda create -n fragmentstein python=3.10 samtools bedtools -c bioconda
+conda activate fragmentstein
+pip install fragmentstein
+```
+The same you can do using the _Mamba_ package manager:
+```sh
+mamba create -n fragmentstein python=3.10 samtools bedtools -c bioconda
+mamba activate fragmentstein
+pip install fragmentstein
+```
+
 Afterwards, you can use fragmentstein directly from your shell:
 ```sh
 fragmentstein -h
 ```
- Alternatively, you can install it from sources:
+Alternatively, you can install it from sources:
 
 Clone the repository.
 ```sh
@@ -36,7 +51,15 @@ git clone https://github.com/uzh-dqbm-cmi/fragmentstein
 cd fragmentstein
 ```
 
-Add the path of the _'./scripts/fragmentstein.sh'_ into your PATH, best in your ~/.bashrc or ~/.zshrc
+Add the path of the _'./scripts/fragmentstein.sh'_ into your PATH, best in your ~/.bashrc or ~/.zshrc using the following command:
+```sh
+echo 'export PATH=$(pwd)/scripts/fragmentstein.sh:$PATH' >> ~/.bashrc
+```
+
+The _fragmentstein.sh_ script should be available in your shell:
+```sh
+fragmentstein.sh -h
+```
 
 ## <a name="usage"></a>Test usage
 The following examples will show you how to do a test run
