@@ -20,7 +20,7 @@ Make sure you have all the dependencies and you will be able to run the program.
 
 ## <a name="installation"></a>Installation
 
-For installing from the Python PyPi repository:
+For installing fragmentstein from the Python PyPi repository:
 ```sh
 pip install fragmentstein
 ```
