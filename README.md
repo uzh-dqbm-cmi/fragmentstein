@@ -1,6 +1,6 @@
 # Fragmentstein
 version 2023.04
-Creating a BAM files from non-sensitive fragments data (i.e. FinaleDB frag.tsv.bgz file) using sequences extracted from a reference genome.
+Creating a BAM files from non-sensitive fragments data (FinaleDB frag.tsv.bgz or fragment coordinate bed, bedpe files) using sequences extracted from a reference genome.
 
 ## Contents
 
@@ -26,13 +26,13 @@ For installing fragmentstein from the Python PyPi repository:
 pip install fragmentstein
 ```
 
-Optional, you can install it in a dedicated Python environment:
+Optional: you can install it in a dedicated Python environment:
 ```sh
 conda create -n fragmentstein python=3.10 samtools bedtools -c bioconda
 conda activate fragmentstein
 pip install fragmentstein
 ```
-The same you can do using the _Mamba_ package manager:
+You can also use the _Mamba_ package manager:
 ```sh
 mamba create -n fragmentstein python=3.10 samtools bedtools -c bioconda
 mamba activate fragmentstein
@@ -43,15 +43,15 @@ Afterwards, you can use fragmentstein directly from your shell:
 ```sh
 fragmentstein -h
 ```
-Alternatively, you can install it from sources:
 
-Clone the repository.
+Alternatively, you can install it from source:
+Clone the repository. (This will not take care of the dependencies)
 ```sh
 git clone https://github.com/uzh-dqbm-cmi/fragmentstein
 cd fragmentstein
 ```
 
-Add the path of the _'./scripts/fragmentstein.sh'_ into your PATH, best in your ~/.bashrc or ~/.zshrc using the following command:
+Add the path of the _'./scripts/fragmentstein.sh'_ into your PATH. In your ~/.bashrc or ~/.zshrc using the following command:
 ```sh
 echo 'export PATH=$(pwd)/scripts/fragmentstein.sh:$PATH' >> ~/.bashrc
 ```
@@ -69,7 +69,7 @@ fragmentstein.sh -i -i tests/data/test_sample1.tsv.bgz -o results/test_sample1.b
     -g tests/data/resources/test_ref_hg38.fna -c tests/data/resources/test_ref.chrom.sizes
 ```
 
-You can install the Python wrapper also from sources as follows:
+You can install the Python wrapper also from source as follows:
 First install the Python dependency management and packaging tool called Poetry: 
 ```sh
 curl -sSL https://install.python-poetry.org | python3 -
