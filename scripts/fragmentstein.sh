@@ -14,7 +14,7 @@ VERSION=2023.4a
 usage()
 {
   echo -e "Fragmentstein v${VERSION}\n"
-  echo -e "Create a BAM file out of insensitive fragments data (i.e. FinaleDB frag.tsv.bgz file) including sequences extracted from a reference genome.\n"
+  echo -e "Create a BAM file from a non-sensitive fragment data file (such as FinaleDB frag.tsv.bgz or bed file) including sequences extracted from a reference genome.\n"
   echo -e "Usage: $0 [options]\n"
   echo -e "Options:\n"
   echo -e "\t required:\n"
