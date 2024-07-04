@@ -115,7 +115,7 @@ Optional arguments
 
 ## <a name="credits"></a>Credits
 Fragmentstein is developed and maintained by Zsolt Balázs and Todor Gitchev.
-To reference the tool, please cite [our paper] (https://academic.oup.com/bioinformatics/article/40/1/btae017/7550024).
+To reference the tool, please cite [our paper](https://academic.oup.com/bioinformatics/article/40/1/btae017/7550024).
 
 [Phred]: https://en.wikipedia.org/wiki/Phred_quality_score
 [incompletely specified nucleotides]: https://en.wikipedia.org/wiki/Nucleic_acid_sequence
